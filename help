@@ -1,72 +1,14 @@
-datasets的绝对路径
-/home/lzj/datasets/cifar10
-
-du -sh : 查看当前目录总共占的容量，而不单独列出各子项占用的容量；
-du -sh ./* : 单独列出各子项占用的容量。
-git版本管理
-git config --global user.name "LZJ"
-git config --global user.email "1396215771@qq.com"
-
-git init
-open .git
-touch 1.py
-git status
-git add 1.py
-git add . #修改所有的文件，到stage状态
-
-git commit -m "change 1"
-git log #查看修改
-git status -s
-git diff
-git diff --cached
-git diff HEAD
-
-git log --oneline
-
-git commit --amend --no-edit
-
-git reset 1.py
-git reset --hard HEAD
-git reset --hard HEAD^
-git reset --hard HEAD^^
-git reset --hard HEAD~10
-git reset --hard 2a17846
-git reflog
-
-git checkout c6762a1 -- 1.py
-
-git log --oneline --graph
-
-git branch dev
-git branch
-git checkout dev
-git branch -d dev
-git checkout -b dev
-git merge --no-ff -m "keep merge" dev
-
-git commit -am "solve conflict"
-
-git commit -m "initial"
-
-rm -rf .git 删除git
-
-cp online-continual-learning-main/ test_github
-
-上传
-proxychains git push -u origin main
-ALL_PROXY=socks5://127.0.0.1:1080 git push -u origin main
-
-ls -a
-
-
-Linux下操作代码
-静态查看GPU使用情况：nvidia-smi
-清空当前终端输出：clear
-
 激活环境
 source online-cl/bin/activate
 
 cd online-continual-learning-main
+
+开多个窗口并行运行程序
+screen -S lzj 创建窗口
+ctrl A + D 从窗口退出
+screen -r main 把后台的窗口弄到前台来
+screen ls
+
 
 在buffer中的buffer_utils中有对降采样的描述
 
@@ -74,4 +16,47 @@ cd online-continual-learning-main
 
 python general_main.py --num_runs 3 --agent ER --retrieve LZJ --update LZJ --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10 --seed 1
 
-python general_main.py --num_runs 1 --agent ER --retrieve random --update GSS --learning_rate 0.01 --epoch 1 --batch 256 --data cifar10 --mem_size 1000 --eps_mem_batch 10
+python general_main.py --num_runs 5 --agent ER --retrieve PSO --update random --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10
+
+
+
+
+
+
+
+
+
+Linux下操作代码
+nvidia-smi #静态查看GPU使用情况
+clear #清空当前终端输出
+du -sh #查看当前目录总共占的容量，而不单独列出各子项占用的容量；
+du -sh ./* #单独列出各子项占用的容量。
+cp online-continual-learning-main/ test_github #复制一个文件夹里的东西到另一个文件夹
+# git版本管理
+git config --global user.name "LZJ"
+git config --global user.email "1396215771@qq.com"
+
+git config --global user.name "用户名"
+git config --global user.password "密码"
+git config --global -l   #查看
+
+git init
+git add . #修改所有的文件，到stage状态
+git commit -m "change 1" #提交上去
+git log --oneline #查看修改
+# 回滚
+git reset --hard HEAD
+git reset --hard HEAD^
+git reset --hard HEAD^^
+git reset --hard HEAD~10
+git reset --hard 2a17846
+rm -rf .git #删除git
+
+
+
+#上传 github
+git remote add origin git@github.com:FirstBeLZJ/experience_continual_learning.git
+proxychains git push -u origin main
+ALL_PROXY=socks5://127.0.0.1:1080 git push -u origin master
+
+

@@ -104,11 +104,11 @@ class ExperienceReplay(ContinualLearner):
 
                         loss_mem.backward()
 
-                        #图像增强的实际执行
-                        mem_x_force = train_transformer(mem_x)
-                        mem_logits = self.model.forward(mem_x)
-                        loss_mem_force = self.criterion(mem_logits, mem_y)
-                        loss_mem_force.backward()
+                        # #图像增强的实际执行
+                        # mem_x_force = train_transformer(mem_x)
+                        # mem_logits = self.model.forward(mem_x)
+                        # loss_mem_force = self.criterion(mem_logits, mem_y)
+                        # loss_mem_force.backward()
 
 
                     if self.params.update == 'ASER' or self.params.retrieve == 'ASER':

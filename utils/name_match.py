@@ -23,6 +23,8 @@ from utils.buffer.sc_retrieve import Match_retrieve
 from utils.buffer.mem_match import MemMatch_retrieve
 from utils.buffer.lzj_retrieve import LZJ_retrieve
 from utils.buffer.lzj_update import LZJ_update
+from utils.buffer.PSO_retrieve import PSO_retrieve
+from utils.buffer.PSO_update import PSO_update
 
 data_objects = {
     'cifar100': CIFAR100,
@@ -49,13 +51,15 @@ retrieve_methods = {
     'ASER': ASER_retrieve,
     'match': Match_retrieve,
     'mem_match': MemMatch_retrieve,
-    'LZJ':LZJ_retrieve
+    'LZJ':LZJ_retrieve,
+    'PSO':PSO_retrieve
 }
 
 update_methods = {
     'random': Reservoir_update,
     'GSS': GSSGreedyUpdate,
     'ASER': ASER_update,
-    'LZJ':LZJ_update
+    'LZJ':LZJ_update,
+    'PSO':PSO_update
 }
 

@@ -13,6 +13,9 @@ class Buffer(torch.nn.Module):
         self.cuda = self.params.cuda
         self.current_index = 0
         self.n_seen_so_far = 0
+        self.n_category_seen_so_far = torch.tensor([0]*100)
+        self.category_center = None
+        self.all_center = None
         self.device = "cuda" if self.params.cuda else "cpu"
 
         # define buffer

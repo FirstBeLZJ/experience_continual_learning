@@ -68,9 +68,9 @@ if __name__ == "__main__":
     parser.add_argument('--agent', dest='agent', default='ER',
                         choices=['ER', 'EWC', 'AGEM', 'CNDPM', 'LWF', 'ICARL', 'GDUMB', 'ASER', 'SCR'],
                         help='Agent selection  (default: %(default)s)')
-    parser.add_argument('--update', dest='update', default='random', choices=['random', 'GSS', 'ASER',"LZJ"],
+    parser.add_argument('--update', dest='update', default='random', choices=['random', 'GSS', 'ASER',"LZJ",'PSO'],
                         help='Update method  (default: %(default)s)')
-    parser.add_argument('--retrieve', dest='retrieve', default='random', choices=['MIR', 'random', 'ASER', 'match', 'mem_match',"LZJ"],
+    parser.add_argument('--retrieve', dest='retrieve', default='random', choices=['MIR', 'random', 'ASER', 'match', 'mem_match',"LZJ","PSO"],
                         help='Retrieve method  (default: %(default)s)')
 
     ########################Optimizer#########################
