@@ -71,6 +71,11 @@ def sorted_cand_ind(buffer,cand_df, cand_y,n_cand):
             Returns
                 sorted_cand_ind (tensor): sorted indices of candidate set w.r.t. each evaluation data.
     """
+    # # 这一部分获得梯度
+    # with torch.no_grad():
+    #     mem_logits = self.model.forward(mem_x)
+
+
     # Sort indices of candidate set according to distance w.r.t. evaluation set in deep feature space
     # Preprocess feature vectors to facilitate vector-wise distance computation
     # print("========eval_df_mean:",eval_df_mean.size())

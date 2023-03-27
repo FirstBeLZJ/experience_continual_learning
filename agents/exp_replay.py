@@ -11,6 +11,9 @@ from utils.utils import maybe_cuda, AverageMeter
 import cv2
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
+import random
+
+
 
 train_transformer = transforms.Compose([
     # 依概率左右翻转
@@ -43,6 +46,7 @@ class ExperienceReplay(ContinualLearner):
         # 对新任务的新类进行预处理，把新类添加进去    
         self.before_train(x_train, y_train)
         # set up loader
+        
         train_dataset = dataset_transform(x_train, y_train, transform=transforms_match[self.data])
         train_loader = data.DataLoader(train_dataset, batch_size=self.batch, shuffle=True, num_workers=0,
                                        drop_last=True)
@@ -58,6 +62,8 @@ class ExperienceReplay(ContinualLearner):
             for i, batch_data in enumerate(train_loader):
                 # batch update
                 batch_x, batch_y = batch_data
+
+
                 batch_x = maybe_cuda(batch_x, self.cuda)
                 batch_y = maybe_cuda(batch_y, self.cuda)
                 for j in range(self.mem_iters):
@@ -86,6 +92,9 @@ class ExperienceReplay(ContinualLearner):
                         mem_x = maybe_cuda(mem_x, self.cuda)
                         mem_y = maybe_cuda(mem_y, self.cuda)
                         
+                        # 进行图像增强
+                        if random.random()>0.5:
+                            mem_x = train_transformer(mem_x)
 
                         mem_logits = self.model.forward(mem_x)
                         loss_mem = self.criterion(mem_logits, mem_y)
@@ -104,7 +113,7 @@ class ExperienceReplay(ContinualLearner):
 
                         loss_mem.backward()
 
-                        # #图像增强的实际执行
+                        # #图像增强的实际执行（虚假的增强，不过是再次训练一遍增强后的图片罢了）
                         # mem_x_force = train_transformer(mem_x)
                         # mem_logits = self.model.forward(mem_x)
                         # loss_mem_force = self.criterion(mem_logits, mem_y)

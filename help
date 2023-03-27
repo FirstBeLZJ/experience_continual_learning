@@ -9,14 +9,32 @@ ctrl A + D 从窗口退出
 screen -r main 把后台的窗口弄到前台来
 screen ls
 
+在utils里写一个进行可视化的方法
 
 在buffer中的buffer_utils中有对降采样的描述
 
 在agents里的exp_replay中有图像增强的描述
 
-python general_main.py --num_runs 3 --agent ER --retrieve LZJ --update LZJ --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10 --seed 1
+已经完成了PSO方法与可持续学习结合
+
+python general_main.py --num_runs 1 --agent ER --retrieve LZJ --update LZJ --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10 --seed 1
 
 python general_main.py --num_runs 5 --agent ER --retrieve PSO --update random --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10
+
+python general_main.py --num_runs 1 --agent ER --retrieve random --update random --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10 --seed 1
+
+# 标准情况下测试可视化的能力
+python general_main.py --num_runs 1 --agent ER --retrieve random --update random --learning_rate 0.001 --epoch 10 --batch 8 --data cifar100 --mem_size 1000 --eps_mem_batch 10 --seed 1
+# debug下测试可视化的能力
+python general_main.py --num_runs 1 --agent ER --retrieve random --update random --learning_rate 0.01 --epoch 1 --batch 256 --data cifar100 --mem_size 1000 --eps_mem_batch 10 --seed 1
+
+python general_main.py --num_runs 5 --agent ER --retrieve random --update random --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10
+
+python general_main.py --num_runs 5 --agent ER --retrieve ASER --update ASER --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10
+
+python general_main.py --num_runs 5 --agent ER --retrieve MIR --update random --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10
+
+python general_main.py --num_runs 5 --agent ER --retrieve MIR --update ASER --learning_rate 0.01 --epoch 1 --batch 16 --data cifar100 --mem_size 1000 --eps_mem_batch 10
 
 
 

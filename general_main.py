@@ -7,7 +7,7 @@ import torch
 from utils.utils import boolean_string
 import time
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '6,7'
+os.environ['CUDA_VISIBLE_DEVICES'] = '5,6'
 
 
 def main(args):

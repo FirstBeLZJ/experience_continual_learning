@@ -15,6 +15,8 @@ import numpy as np
 import pandas as pd
 import os
 import pickle
+from utils.plot_SNE import plot_SNE
+from utils.utils import mini_batch_deep_features
 
 
 def multiple_run(params, store=False, save_path=None):
@@ -69,10 +71,27 @@ def multiple_run(params, store=False, save_path=None):
         # 开始进行训练，online表示正常持续学习，offline表示不分成一个个任务而一起训练
         if params.online:
             for i, (x_train, y_train, labels) in enumerate(data_continuum):
+
+
+                # # ============debug专用===============
+                # if i == 0 and params.agent=="ER":
+                    
+                #     plot_SNE(x_train,y_train,agent.buffer)
+                #     print("没有bug！")
+                # # ============debug专用===============
+                # # 
+                #    
                 print("-----------第{}次 任务{}-------------".format(run, i))
                 print('训练集大小: {}, {}'.format(x_train.shape, y_train.shape))
                 # 在这里执行实际的训练过程
+
                 agent.train_learner(x_train, y_train)
+                # 此处将特征空间上的点绘制出来
+                Plot_SNE = False
+                if i == 0 and params.agent=="ER" and Plot_SNE:
+                    plot_SNE(x_train,y_train,agent.buffer)
+   
+
                 acc_array = agent.evaluate(test_loaders)
                 tmp_acc.append(acc_array)
             run_end = time.time()
